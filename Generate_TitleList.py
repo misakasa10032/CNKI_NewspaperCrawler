@@ -2,6 +2,8 @@
 
 #################################################
 #            Crawler applied in CNKI            #
+#                   Part    I                   #
+#               Generate Title List             #
 #                    Sep 2018                   #  
 #            Cheng Xie Fudan University         #
 #################################################
