@@ -2,6 +2,8 @@
 
 #################################################
 #            Crawler applied in CNKI            #
+#                   Part    II                  #
+#                Capture  Article               #
 #                    Sep 2018                   #  
 #            Cheng Xie Fudan University         #
 #################################################
