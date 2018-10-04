@@ -83,7 +83,8 @@ for m_0 in range(int(start_time[5:7]), 13):
         date_list.extend(dict_ym[start_time[0:4] + '-' + add_zero(m_0)][0: ])
 for y_0 in range(int(start_time[0:4]) + 1, int(end_time[0:4])):
     for m_0 in range(1,13):
-        date_list.extend(dict_ym[str(y_0) + '-' + add_zero(m_0)][0: ])
+        if str(y_0) + '-' + add_zero(m_0) in dict_ym.keys():
+            date_list.extend(dict_ym[str(y_0) + '-' + add_zero(m_0)][0: ])
 for m_0 in range(1, int(end_time[5:7]) + 1):
     if m_0 == int(end_time[5:7]):
         critical_index = dict_ym[end_time[0:7]].index(end_time)
