@@ -11,6 +11,7 @@
 import requests
 import pandas as pd
 import time
+import re
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
@@ -30,6 +31,7 @@ headers = {'Host': 'kreader.cnki.net',
 'Accept-Encoding': 'gzip, deflate',
 'Accept-Language': 'zh-CN,zh;q=0.9'}
 
+pattern = re.compile('[\*\\\/:\?"<>\|]')
 cookie_url = 'http://kreader.cnki.net/Kreader/ViewPage.aspx?dbCode=CCND&filename=CZJB20181010A020&tablename=CCNDPREP&uid='
 login_url = 'http://login.cnki.net/login/?platform=kns&ForceReLogin=1&ReturnURL=http://www.cnki.net/'
 driver = webdriver.Chrome()
@@ -70,7 +72,7 @@ for k in range(1, len(df) + 1):
     stop_flag = 0
     doc = df.loc[k]['doc']
     table_name = df.loc[k]['table_name']
-    name = df.loc[k]['title']
+    name = re.sub(pattern, '', str(df.loc[k]['title']))
     referer = referer_part1 + doc + referer_part2 + table_name + referer_part3
     headers['Referer'] = referer
     while stop_flag == 0:
