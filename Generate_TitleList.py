@@ -4,7 +4,7 @@
 #            Crawler applied in CNKI            #
 #                   Part    I                   #
 #               Generate Title List             #
-#                    Sep 2018                   #  
+#                    Oct 2018                   #  
 #            Cheng Xie Fudan University         #
 #################################################
 
@@ -37,8 +37,8 @@ headers_b0 = {'Host': 'navi.cnki.net',
 'Referer': 'http://navi.cnki.net/KNavi/NPaperDetail?pcode=CCND&bzpym='}
 
 #   Designate the start time and the end time. ATTENTION: The start time and end time must be business day.
-start_time = '2018-09-26'
-end_time = '2018-09-28'
+start_time = '2018-09-01'
+end_time = '2018-10-10'
 
 #   Designate the map from name to code
 n2c_dict = {'中国证券报': 'CZJB', '光明日报': 'GMRB', '经济日报': 'JJRB', '科技日报': 'KJRB', '经济参考报': 'JJCK', '华夏时报': 'HXSB', '证券日报': 'CJRB', '证券时报': 'ZJSB', '上海证券报': 'SHZJ', '中国能源报': 'SHCA', '中国自然资源报': 'GTZY', '中国冶金报': 'CYJB', '中国电力报': 'CDLB', '中国煤炭报': 'CMTB', '中国石油报': 'SHYO', '中国贸易报': 'CMYB', '中国有色金属报': 'YSJS', '中国建材报': 'CJCB', '中国石化报': 'CSHB', '中国黄金报': 'ZGHJ', '中国矿业报': 'CKYB', '中煤地质报': 'ZMDZ', '中国工业报': 'CGYB', '华北电力报': 'HBDL', '地质勘查导报': 'DZKC', '石油管道报': 'SYGD', '铜陵有色报': 'TLYS', '期货日报': 'QHBR'}
@@ -61,11 +61,11 @@ def add_zero(m):
 out_path = 'E:/outcome.csv'
 
 #   Obtain titles, authors, sources
-df = pd.DataFrame(columns = ['date', 'title', 'author', 'source'], index = ['date'])
+df = pd.DataFrame(columns = ['date', 'title', 'author', 'source', 'doc', 'table_name'], index = ['date'])
 k = 1
 
 #   Designate the name of the newspaper
-news = '期货日报'
+news = '中国证券报'
 
 #   Request for obtaining the source code underlying the dates
 dict_ym = {}
@@ -133,7 +133,10 @@ for date in date_list:
         title = j.find(name = 'a', attrs = {'target': '_blank'}).string
         author = j.find_all(name = 'td')[3].string
         source = news
-        df = df.append({'date': pd.to_datetime(date), 'title': title, 'author': author, 'source': source}, ignore_index = True)
+        href = j.find(name = 'a', attrs = {'target': '_blank'})['href'].strip()
+        doc = href[51:67]
+        table_name = href[78: ]
+        df = df.append({'date': pd.to_datetime(date), 'title': title, 'author': author, 'source': source, 'doc': doc, 'table_name': table_name}, ignore_index = True)
     #   Exhibit the proceeding
     print(k/len(date_list))
     k += 1
