@@ -35,7 +35,10 @@ pattern = re.compile('[\*\\\/:\?"<>\|]')
 cookie_url = 'http://kreader.cnki.net/Kreader/ViewPage.aspx?dbCode=CCND&filename=CZJB20181010A020&tablename=CCNDPREP&uid='
 login_url = 'http://login.cnki.net/login/?platform=kns&ForceReLogin=1&ReturnURL=http://www.cnki.net/'
 driver = webdriver.Chrome()
+
+#   ADJUSTMENT NEEDED!!!
 file_path = 'E:/outcome.csv'
+
 df = pd.DataFrame.from_csv(file_path)
 
 def proc():
