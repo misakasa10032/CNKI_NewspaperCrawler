@@ -36,7 +36,8 @@ headers_b0 = {'Host': 'navi.cnki.net',
 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
 'Referer': 'http://navi.cnki.net/KNavi/NPaperDetail?pcode=CCND&bzpym='}
 
-#   Designate the start time and the end time. ATTENTION: The start time and end time must be business day.
+'''   Designate the start time and the end time. ATTENTION: The start time and end time must be business day.
+ADJUSTMENT NEEDED!!!'''
 start_time = '2018-09-01'
 end_time = '2018-10-10'
 
@@ -57,18 +58,21 @@ def add_zero(m):
         m = str(m)
     return m
 
-#   The name of the file must be in English
+'''   The name of the file must be in English
+ADJUSTMENT NEEDED!!!'''
 out_path = 'E:/outcome.csv'
 
 #   Obtain titles, authors, sources
 df = pd.DataFrame(columns = ['date', 'title', 'author', 'source', 'doc', 'table_name'], index = ['date'])
 k = 1
 
-#   Designate the name of the newspaper
+'''   Designate the name of the newspaper
+ADJUSTMENT NEEDED!!!'''
 news = '中国证券报'
 
 #   Request for obtaining the source code underlying the dates
 dict_ym = {}
+#   ADJUSTMENT MIGHT BE NEEDED!!!
 for year in range(2000, 2019):
     body_b = 'py=' + n2c_dict[news] + '&pcode=CCND&year=' + str(year)
     headers_b = headers_b0
