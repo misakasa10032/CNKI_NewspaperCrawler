@@ -2,7 +2,7 @@
 
 #################################################
 #            Crawler applied in CNKI            #
-#                   Part    III                 #
+#                   Part    IV                  #
 #                   IMG TO TXT                  #
 #                    Oct 2018                   #  
 #            Cheng Xie Fudan University         #
