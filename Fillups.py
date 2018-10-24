@@ -48,7 +48,7 @@ headers = {'Host': 'kreader.cnki.net',
 'Accept-Encoding': 'gzip, deflate',
 'Accept-Language': 'zh-CN,zh;q=0.9'}
 
-pattern = re.compile('[\*\\\/:\?"<>\|]')
+pattern = re.compile('[\*\\\/:\?"<>\|\r\n]')
 cookie_url = 'http://kreader.cnki.net/Kreader/ViewPage.aspx?dbCode=CCND&filename=CZJB20181010A020&tablename=CCNDPREP&uid='
 login_url = 'http://login.cnki.net/login/?platform=kns&ForceReLogin=1&ReturnURL=http://www.cnki.net/'
 driver = webdriver.Chrome()
