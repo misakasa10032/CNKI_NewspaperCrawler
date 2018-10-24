@@ -41,8 +41,9 @@ df_outlier = df[df['title'].str.contains(pattern)]
 for j in df_outlier.index.values:
     df.loc[j, 'title'] = re.sub(pattern, '', str(df.loc[j]['title']))
 
-#	Create the directory of the text set
-os.mkdir(path_txt)
+#	Create the directory of the text set if it doesn't exist
+if os.path.exists(path_txt) is False:
+    os.mkdir(path_txt)
 
 pathdir = sorted(os.listdir(path_img))
 client = AipOcr(app_id, api_key, secret_key)
@@ -73,7 +74,9 @@ def get_FullTitle(title):
     return date[0], author[0], source[0]
 
 flag = 0
-for k in range(len(pathdir)):
+start_num = 0
+end_num = len(pathdir)
+for k in range(start_num, end_num):
     if flag == 0:
         title = pathdir[k][0:len(pathdir[k]) - 7]
     if flag == 0:
@@ -89,4 +92,4 @@ for k in range(len(pathdir)):
         f = open(path_txt + file_name + '.txt', 'w')
         f.write(content)
         f.close()
-        print(title + ' is OK')
+        print(str(k) + '   ' + title + ' is OK')
