@@ -67,6 +67,8 @@ def get_FullTitle(title):
     df_small = df[df['title'] == title].reset_index()
     date = df_small['date']
     author = df_small['author']
+    if type(author[0]) is float:
+        author = ['NaN']
     source = df_small['source']
     return date[0], author[0], source[0]
 
