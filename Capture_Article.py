@@ -37,7 +37,7 @@ login_url = 'http://login.cnki.net/login/?platform=kns&ForceReLogin=1&ReturnURL=
 driver = webdriver.Chrome()
 
 #   ADJUSTMENT NEEDED!!!
-file_path = 'E:/outcome.csv'
+file_path = 'D:/SHZQB.csv'
 
 df = pd.DataFrame.from_csv(file_path)
 
