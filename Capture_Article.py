@@ -31,7 +31,7 @@ headers = {'Host': 'kreader.cnki.net',
 'Accept-Encoding': 'gzip, deflate',
 'Accept-Language': 'zh-CN,zh;q=0.9'}
 
-pattern = re.compile('[\*\\\/:\?"<>\|]')
+pattern = re.compile('[\*\\\/:\?"<>\|\r\n]')
 cookie_url = 'http://kreader.cnki.net/Kreader/ViewPage.aspx?dbCode=CCND&filename=CZJB20181010A020&tablename=CCNDPREP&uid='
 login_url = 'http://login.cnki.net/login/?platform=kns&ForceReLogin=1&ReturnURL=http://www.cnki.net/'
 driver = webdriver.Chrome()
@@ -65,9 +65,11 @@ def proc():
     return cookies, t
 
 ta = time.time()
-for k in range(1, len(df) + 1):
+start_num = 1
+end_num = len(df) + 1
+for k in range(start_num, end_num):
     t_gap = time.time() - ta
-    if (k == 1 or t_gap >= 1200):
+    if (k == start_num or t_gap >= 1200):
         cookies = proc()[0]
         ta = proc()[1]
     page = 1
