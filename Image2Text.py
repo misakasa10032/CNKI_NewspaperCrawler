@@ -76,7 +76,7 @@ def get_FullTitle(title):
 flag = 0
 start_num = 0
 end_num = len(pathdir)
-for k in range(52, end_num):
+for k in range(start_num, end_num):
     if flag == 0:
         title = pathdir[k][0:len(pathdir[k]) - 7]
     if flag == 0:
