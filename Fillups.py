@@ -11,7 +11,6 @@
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
-import requests
 import time
 import re
 from selenium import webdriver
@@ -57,6 +56,11 @@ driver = webdriver.Chrome()
 ADJUSTMENT NEEDED!!!'''
 out_path = 'D:/out.csv'
 
+#   Designate the proxy. ATTENTION: The format is USER:PASSWORD@IP:PROT
+proxies = {
+    "http": "http://tc2002429:18je58r4@123.206.71.186:16818/",
+}
+
 def proc():
     driver.get(login_url)
     driver.find_element_by_xpath('//*[@id="TextBoxUserName"]').send_keys('18362928852')
@@ -86,7 +90,7 @@ for item in title_series:
         doc = df.loc[k]['doc']
         table_name = df.loc[k]['table_name']
         url = url_par1 + url_par2 + doc + url_par3 + table_name
-        html = requests.get(url)
+        html = requests.get(url = url, proxies = proxies)
         soup = BeautifulSoup(html.text, 'lxml')
         title_string = soup.find(name = 'h2').get_text()
         df.loc[k]['title'] = title_string
@@ -99,7 +103,7 @@ for item in title_series:
         while stop_flag == 0:
             url = url_part1 + doc + url_part2 + table_name + url_part3 + str(page) + url_part4
             page += 1
-            r = requests.post(url = url, headers = headers, cookies = cookies)
+            r = requests.post(url = url, headers = headers, cookies = cookies, proxies = proxies)
             if len(r.content) == 17590:
                 stop_flag = 1
                 continue
