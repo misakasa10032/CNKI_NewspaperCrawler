@@ -41,6 +41,11 @@ ADJUSTMENT NEEDED!!!'''
 start_time = '2018-09-01'
 end_time = '2018-10-10'
 
+#   Designate the proxy. ATTENTION: The format is USER:PASSWORD@IP:PROT
+proxies = {
+    "http": "http://tc2002429:18je58r4@123.206.71.186:16818/",
+}
+
 #   Designate the map from name to code
 n2c_dict = {'中国证券报': 'CZJB', '光明日报': 'GMRB', '经济日报': 'JJRB', '科技日报': 'KJRB', '经济参考报': 'JJCK', '华夏时报': 'HXSB', '证券日报': 'CJRB', '证券时报': 'ZJSB', '上海证券报': 'SHZJ', '中国能源报': 'SHCA', '中国自然资源报': 'GTZY', '中国冶金报': 'CYJB', '中国电力报': 'CDLB', '中国煤炭报': 'CMTB', '中国石油报': 'SHYO', '中国贸易报': 'CMYB', '中国有色金属报': 'YSJS', '中国建材报': 'CJCB', '中国石化报': 'CSHB', '中国黄金报': 'ZGHJ', '中国矿业报': 'CKYB', '中煤地质报': 'ZMDZ', '中国工业报': 'CGYB', '华北电力报': 'HBDL', '地质勘查导报': 'DZKC', '石油管道报': 'SYGD', '铜陵有色报': 'TLYS', '期货日报': 'QHBR'}
 
@@ -77,7 +82,7 @@ for year in range(2000, 2019):
     body_b = 'py=' + n2c_dict[news] + '&pcode=CCND&year=' + str(year)
     headers_b = headers_b0
     headers_b['Referer'] = headers_b['Referer'] + n2c_dict[news]
-    r_b = requests.post(url = url_b, data = body_b, headers = headers_b)
+    r_b = requests.post(url = url_b, data = body_b, headers = headers_b, proxies = proxies)
     String_b = BeautifulSoup(r_b.content.decode(), 'lxml')
     date_list = String_b.find_all(name = 'a', attrs = {'href': 'javascript:void(0);'})
     flag_0 = 0
@@ -130,7 +135,7 @@ for date in date_list:
     body_a = 'py=' + n2c_dict[news] + '&pcode=CCND&pageIndex=1&pageSize=500&date=' + str(date)
     headers_a = headers_a0
     headers_a['Referer'] = headers_a0['Referer'] + n2c_dict[news]
-    r_a = requests.post(url = url_a, data = body_a, headers = headers_a)
+    r_a = requests.post(url = url_a, data = body_a, headers = headers_a, proxies = proxies)
     r = r_a.content.decode()
     soup = BeautifulSoup(r, 'lxml')
     for j in soup.find_all(name = 'tr')[1: ]:
