@@ -31,6 +31,11 @@ headers = {'Host': 'kreader.cnki.net',
 'Accept-Encoding': 'gzip, deflate',
 'Accept-Language': 'zh-CN,zh;q=0.9'}
 
+#   Designate the proxy. ATTENTION: The format is USER:PASSWORD@IP:PROT
+proxies = {
+    "http": "http://tc2002429:18je58r4@123.206.71.186:16818/",
+}
+
 pattern = re.compile('[\*\\\/:\?"<>\|\r\n]')
 cookie_url = 'http://kreader.cnki.net/Kreader/ViewPage.aspx?dbCode=CCND&filename=CZJB20181010A020&tablename=CCNDPREP&uid='
 login_url = 'http://login.cnki.net/login/?platform=kns&ForceReLogin=1&ReturnURL=http://www.cnki.net/'
@@ -83,7 +88,7 @@ for k in range(start_num, end_num):
     while stop_flag == 0:
         url = url_part1 + doc + url_part2 + table_name + url_part3 + str(page) + url_part4
         page += 1
-        r = requests.post(url = url, headers = headers, cookies = cookies)
+        r = requests.post(url = url, headers = headers, cookies = cookies, proxies = proxies)
         if len(r.content) == 17590:
             stop_flag = 1
             continue
